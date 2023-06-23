@@ -5,11 +5,16 @@ plug('neoclide/coc.nvim', {branch = 'release'})
 plug('nvim-lua/plenary.nvim')
 plug('nvim-telescope/telescope.nvim')
 plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
+plug('nvim-lualine/lualine.nvim')
 vim.call('plug#end')
 
 vim.cmd('colorscheme gruvbox-material')
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
+vim.cmd('set noshowmode')
+vim.cmd('set noruler')
+vim.cmd('set laststatus=0')
+vim.cmd('set noshowcmd')
 vim.cmd('set tabstop=4')
 vim.cmd('set shiftwidth=4')
 vim.cmd('set expandtab')
@@ -42,17 +47,26 @@ vim.keymap.set('n', '<leader>fg', telescope.live_grep, {})
 vim.keymap.set('n', '<leader>fb', telescope.buffers, {})
 vim.keymap.set('n', '<leader>fh', telescope.help_tags, {})
 
-require('telescope').setup{
+require('telescope').setup({
 	defaults = {
         previewer = true,
         file_previewer = require('telescope.previewers').vim_buffer_cat.new,
         grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
         qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 	}
-}
+})
 
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
     highlight = {
         enable = true,
     },
-}
+})
+
+require('lualine').setup({
+    options = {
+        theme = 'auto',
+        icons_enabled = false,
+        component_separators = '',
+        section_separators = '',
+    }
+})
